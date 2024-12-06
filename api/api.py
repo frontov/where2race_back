@@ -26,10 +26,11 @@ kind_models = to_models(kinds)
 
 db = TinyDB('../db.json')
 events_table = tinydb.Query()
-events = sorted(db.search(events_table.kind.any(kinds)), key=lambda k: k['date_start'])
-
+events = sorted(db.all(), key=lambda k: k['date_start'])
+print(len(events))
 event_models = []
 for event in events:
+    print(event['kind'])
     event_models.append(EventModel(event))
 
 max_date = int(round(datetime.strptime('2044-12-31', '%Y-%m-%d').timestamp()))
@@ -48,8 +49,10 @@ async def get_events(start_date: Optional[int] = Query(None),
     end_date = end_date/1000 if end_date else max_date
 
     print(start_date, end_date)
-    result = filter(lambda event: start_date <= event.timestamp_date <= end_date, event_models)
-    return list(result)
+
+    print()
+    # result = filter(lambda event: 'running' == event.kind, event_models)
+    return list(event_models)
 
 
 @app.get("/kinds")
@@ -57,8 +60,3 @@ async def get_kinds():
     return kind_models
 
 
-
-
-
-# cat ~/.ssh/id_rsa.pub | ssh root@194.4.48.66 "mkdir ~/.ssh; cat >> ~/.ssh/authorized_keys"
-# https://t.me/y

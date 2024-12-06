@@ -12,6 +12,7 @@ request_data = '''
  "OnlyWithAdmissions": false, "SortRule": {"Type": 0, "Direction": 1}, "IntoRayRussiaRunnung": false,
  "HidePastEvents": false}'''
 
+kinds = {'run': 'running', 'Велогонка': 'cycling', 'ski-race': 'skiing'}
 
 def get_events():
     headers = {'content-type': 'application/json', }
@@ -30,7 +31,7 @@ def parse_events():
         slug = item['c']
         link = 'https://russiarunning.com/event/' + item['c']
         description = ''
-        kind = [item['dc']]
+        kind = [kinds.get(item['dc'], 'other')]
         sub_kind = ''
         date_start = russiarunning_date_to_timestamp(item['d'])
         date_finish = russiarunning_date_to_timestamp(item['et'])

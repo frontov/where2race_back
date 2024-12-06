@@ -21,7 +21,7 @@ class EventModel:
         self.link = event['link']
         self.description = event['description']
         self.kind = ", ".join(event['kind'])
-        self.kind_rus = ", ".join(event['kind_rus'])
+        self.kind_rus = ", ".join(event.get('kind_rus', ''))
         self.sub_kind = event['sub_kind']
         self.date = timestamp_to_datetime(event['date_start'])
         self.timestamp_date = int(event['date_start'])
