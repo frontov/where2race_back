@@ -12,7 +12,6 @@ from event_model import EventModel
 app = FastAPI()
 
 origins = ["*"]
-
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
@@ -36,7 +35,8 @@ for event in events:
 max_date = int(round(datetime.strptime('2044-12-31', '%Y-%m-%d').timestamp()))
 current_date = int(round(datetime.strptime(str(date.today()), '%Y-%m-%d').timestamp()))
 print(current_date)
-print(list(kinds.values()))
+
+
 
 
 # events = db.search((events_table.kind.any(kinds)) & (events_table.date_start >= now.timestamp()) & (
@@ -45,18 +45,21 @@ print(list(kinds.values()))
 @app.get("/events")
 async def get_events(start_date: Optional[int] = Query(None),
                      end_date: Optional[int] = Query(None)):
-    start_date = start_date/1000 if start_date else current_date
-    end_date = end_date/1000 if end_date else max_date
+    print(start_date, end_date)
+    if not start_date and not end_date:
+        start_date = current_date
+        end_date = current_date + 30 * 24 * 60 * 60
+    else:
+        start_date = start_date / 1000 if start_date else current_date
+        end_date = end_date / 1000 if end_date else max_date
 
     print(start_date, end_date)
 
-    print()
-    # result = filter(lambda event: 'running' == event.kind, event_models)
-    return list(event_models)
+    result = list(filter(lambda event: start_date <= event.timestamp_date <= end_date, event_models))
+    print(len(result))
+    return result
 
 
 @app.get("/kinds")
 async def get_kinds():
     return kind_models
-
-
