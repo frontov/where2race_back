@@ -46,12 +46,8 @@ print(current_date)
 async def get_events(start_date: Optional[int] = Query(None),
                      end_date: Optional[int] = Query(None)):
     print(start_date, end_date)
-    if not start_date and not end_date:
-        start_date = current_date
-        end_date = current_date + 30 * 24 * 60 * 60
-    else:
-        start_date = start_date / 1000 if start_date else current_date
-        end_date = end_date / 1000 if end_date else max_date
+    start_date = start_date / 1000 if start_date else current_date
+    end_date = end_date / 1000 if end_date else start_date + 30 * 24 * 60 * 60
 
     print(start_date, end_date)
 
