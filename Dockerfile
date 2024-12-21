@@ -8,7 +8,7 @@ WORKDIR /app
 COPY . .
 
 # Install any needed packages specified in requirements.txt
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install -r requirements.txt
 RUN python main.py
 
 WORKDIR /app/api
@@ -18,5 +18,5 @@ WORKDIR /app/api
 EXPOSE 8000
 
 # Command to run the application using Uvicorn
-CMD ["uvicorn", "api:app", "--host", "0.0.0.0", "--port", "443", "--ssl-keyfile", "where2race.key", "--ssl-certfile", "where2race.crt "]
+CMD ["uvicorn", "api:app", "--host", "0.0.0.0", "--port", "443", "--ssl-keyfile", "where2race.key", "--ssl-certfile", "where2race.crt"]
 
