@@ -1,5 +1,5 @@
 #cd /Users/roman/PycharmProjects/wheretorace
-cd /usr/local/src/where2race/where/where2race_back
+cd /usr/local/src/where2race/where2race_back
 git pull origin main
 if docker inspect where2race > /dev/null 2>&1; then
     docker stop where2race
