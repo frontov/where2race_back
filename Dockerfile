@@ -14,7 +14,7 @@ RUN #python main.py
 #WORKDIR /app/api
 
 # Копирование файла конфигурации
-COPY uvicorn.conf.py .
+COPY uvicornconf.py .
 
 # Запуск Uvicorn
-CMD ["uvicorn", "uvicorn_conf:app", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["uvicorn", "uvicornconf:app", "--host", "0.0.0.0", "--port", "8000"]
