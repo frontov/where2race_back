@@ -11,11 +11,6 @@ COPY . .
 RUN pip install -r requirements.txt
 RUN #python main.py
 
-# Копирование сертификатов
-COPY /etc/letsencrypt/live/back.where2race.ru/fullchain.pem /etc/letsencrypt/live/back.where2race.ru/fullchain.pem
-COPY /etc/letsencrypt/live/back.where2race.ru/privkey.pem /etc/letsencrypt/live/back.where2race.ru/privkey.pem
-
-
 #WORKDIR /app/api
 
 # Копирование файла конфигурации
