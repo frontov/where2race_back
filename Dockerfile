@@ -6,8 +6,8 @@ WORKDIR /app
 
 # Copy the current directory contents into the container at /app
 COPY . .
-COPY where2race.crt ./api/
-COPY where2race.key ./api/
+COPY /etc/letsencrypt/live/back.where2race.ru/fullchain.pem ./api/
+COPY /etc/letsencrypt/live/back.where2race.ru/privkey.pem ./api/
 
 # Install any needed packages specified in requirements.txt
 RUN pip install -r requirements.txt
@@ -20,5 +20,5 @@ WORKDIR /app/api
 EXPOSE 443
 
 # Command to run the application using Uvicorn
-CMD ["uvicorn", "api:app", "--host", "0.0.0.0", "--port", "443", "--ssl-keyfile", "where2race.key", "--ssl-certfile", "where2race.crt"]
+CMD ["uvicorn", "api:app", "--host", "0.0.0.0", "--port", "443", "--ssl-keyfile", "privkey.pem", "--ssl-certfile", "fullchain.pem"]
 
