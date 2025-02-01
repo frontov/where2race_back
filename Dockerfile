@@ -6,8 +6,8 @@ WORKDIR /app
 
 # Copy the current directory contents into the container at /app
 COPY . .
-COPY /etc/letsencrypt/live/back.where2race.ru/fullchain.pem ./api/
-COPY /etc/letsencrypt/live/back.where2race.ru/privkey.pem ./api/
+COPY fullchain.pem ./api/
+COPY privkey.pem ./api/
 
 # Install any needed packages specified in requirements.txt
 RUN pip install -r requirements.txt
