@@ -11,10 +11,8 @@ COPY . .
 RUN pip install -r requirements.txt
 RUN #python main.py
 
-#WORKDIR /app/api
 
-# Копирование файла конфигурации
-COPY uvicornconf.py .
+WORKDIR /app/api
 
 # Запуск Uvicorn
-CMD ["uvicorn", "uvicornconf:app", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["uvicorn", "api:app", "--host", "0.0.0.0", "--port", "8000", "--ssl-keyfile", "/etc/letsencrypt/live/back.where2race.ru/privkey.pem", "--ssl-certfile", "/etc/letsencrypt/live/back.where2race.ru/fullchain.pem"]
