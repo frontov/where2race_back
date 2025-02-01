@@ -11,10 +11,10 @@ COPY . .
 RUN pip install -r requirements.txt
 RUN python main.py
 
-WORKDIR /app/api
+#WORKDIR /app/api
 
 # Копирование файла конфигурации
-COPY uvicorn.conf.py .
+#COPY uvicorn.conf.py .
 
 # Запуск Uvicorn
-CMD ["uvicorn", "uvicorn.conf.py", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["uvicorn", "uvicorn_conf:app", "--host", "0.0.0.0", "--port", "8000"]
