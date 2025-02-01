@@ -9,4 +9,5 @@ ssl_context.load_cert_chain('/etc/letsencrypt/live/back.where2race.ru/fullchain.
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run("api:app", host="0.0.0.0", port=8000, ssl = ssl_context)
+    uvicorn.run("api:app", host="127.0.0.1", port=8000)
+    # uvicorn.run("api:app", host="0.0.0.0", port=8000)
