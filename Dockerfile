@@ -15,10 +15,8 @@ RUN python main.py
 
 WORKDIR /app/api
 
+# Копирование файла конфигурации
+COPY uvicorn.conf.py .
 
-# Expose the port that Uvicorn will run on
-EXPOSE 443
-
-# Command to run the application using Uvicorn
-CMD ["uvicorn", "api:app", "--host", "0.0.0.0", "--port", "443", "--ssl-keyfile", "where2race.key", "--ssl-certfile", "where2race.crt"]
-
+# Запуск Uvicorn
+CMD ["uvicorn", "uvicorn.conf.py", "--host", "0.0.0.0", "--port", "8000"]
