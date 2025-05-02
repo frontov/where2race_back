@@ -14,4 +14,4 @@ WORKDIR /app/api
 COPY . .
 
 # Указываем команду для запуска приложения
-CMD ["uvicorn", "api:app", "--host", "0.0.0.0", "--port", "8000", "--ssl-keyfile", "/etc/letsencrypt/live/yourdomain.com/privkey.pem", "--ssl-certfile", "/etc/letsencrypt/live/yourdomain.com/fullchain.pem"]
+CMD ["uvicorn", "api:app", "--host", "0.0.0.0", "--port", "8000", "--ssl-keyfile", "/etc/letsencrypt/live/api.where2race.ru/privkey.pem", "--ssl-certfile", "/etc/letsencrypt/live/api.where2race.ru/fullchain.pem"]
