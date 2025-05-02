@@ -4,14 +4,14 @@ FROM python:3.9
 
 # Устанавливаем зависимости
 WORKDIR /app
-COPY requirements.txt .
+# Копируем код приложения
+COPY . .
+
 RUN pip install --no-cache-dir -r requirements.txt
 RUN python main.py
 
 WORKDIR /app/api
 
-# Копируем код приложения
-COPY . .
 
 # Указываем команду для запуска приложения
-CMD ["uvicorn", "api:app", "--host", "0.0.0.0", "--port", "8000", "--ssl-keyfile", "/etc/letsencrypt/live/api.where2race.ru/privkey.pem", "--ssl-certfile", "/etc/letsencrypt/live/api.where2race.ru/fullchain.pem"]
+CMD ["uvicorn", "api:app", "--host", "0.0.0.0", "--port", "80", "--ssl-keyfile", "/etc/letsencrypt/live/api.where2race.ru/privkey.pem", "--ssl-certfile", "/etc/letsencrypt/live/api.where2race.ru/fullchain.pem"]

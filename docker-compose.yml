@@ -15,4 +15,5 @@ services:
     image: certbot/certbot
     volumes:
       - ./certs:/etc/letsencrypt
-    entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait ${!}; done;'"
+    entrypoint: "/etc/letsencrypt/cerbot_updater.sh"
+
